@@ -70,10 +70,24 @@ const deleteTaskById: RequestHandler = catchAsync(
   }
 );
 
+const getTaskByTeamId: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const result = await TaskService.getTaskByTeamId(id);
+    sendResponse<ITask>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Task fetched successfully!',
+      data: result,
+    });
+  }
+);
+
 export const TaskController = {
   createTask,
   getAllTasks,
   getTaskById,
   updateTaskById,
   deleteTaskById,
+  getTaskByTeamId,
 };

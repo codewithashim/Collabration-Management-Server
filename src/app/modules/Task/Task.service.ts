@@ -40,43 +40,56 @@ const getTaskById = async (id: string): Promise<ITask | null> => {
   }
 };
 
+const getTaskByTeamId = async (id: string): Promise<ITask | null> => {
+  try {
+    const getTaskByTeam = await Task.findOne({ team: id });
+    return getTaskByTeam;
+  } catch (error) {
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      'Internal server error'
+    );
+  }
+};
+
 const updateTaskById = async (
-    id: string,
-    payload: ITask
-  ): Promise<ITask | null> => {
-    try {
-      const result = await Task.findOneAndUpdate(
-        { _id: id },
-        { ...payload },
-        {
-          new: true,
-        }
-      );
-      return result;
-    } catch (error) {
-      throw new ApiError(
-        httpStatus.INTERNAL_SERVER_ERROR,
-        "Internal server error"
-      );
-    }
-  };
-  
-  const deleteTaskById = async (id: string): Promise<ITask | null> => {
-    try {
-      const about = await Task.findByIdAndDelete(id);
-      return about;
-    } catch (error) {
-      throw new ApiError(
-        httpStatus.INTERNAL_SERVER_ERROR,
-        "Internal server error"
-      );
-    }
-  };
-  
+  id: string,
+  payload: ITask
+): Promise<ITask | null> => {
+  try {
+    const result = await Task.findOneAndUpdate(
+      { _id: id },
+      { ...payload },
+      {
+        new: true,
+      }
+    );
+    return result;
+  } catch (error) {
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      'Internal server error'
+    );
+  }
+};
+
+const deleteTaskById = async (id: string): Promise<ITask | null> => {
+  try {
+    const about = await Task.findByIdAndDelete(id);
+    return about;
+  } catch (error) {
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      'Internal server error'
+    );
+  }
+};
+
 export const TaskService = {
   createTask,
   getAllTask,
   getTaskById,
-    updateTaskById,
-    deleteTaskById
+  updateTaskById,
+  deleteTaskById,
+  getTaskByTeamId,
 };

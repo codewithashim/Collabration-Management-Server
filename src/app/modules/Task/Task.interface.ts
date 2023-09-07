@@ -6,8 +6,10 @@ export type ITask = {
   description: string;
   dueDate: string;
   priorityLevel: string;
-  assignUser: Array<string>;
+  assignTo: string[];
   taskAuthor: string;
+  status: string;
+  team?: string;
 };
 
 export type TaskModel = Model<ITask, Record<string, unknown>>;

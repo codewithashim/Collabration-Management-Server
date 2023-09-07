@@ -2,7 +2,7 @@
 import { Schema, model } from 'mongoose';
 import { ITask, TaskModel } from './Task.interface';
 
-const userSchema = new Schema<ITask, Record<string, never>>(
+const taskSchema = new Schema<ITask, Record<string, never>>(
   {
     title: {
       type: String,
@@ -18,16 +18,25 @@ const userSchema = new Schema<ITask, Record<string, never>>(
     },
     priorityLevel: {
       type: String,
-      required: true,
     },
     taskAuthor: {
       type: String,
       required: true,
     },
-    assignUser: {
-      type: [String],
-      required: true,
+    status: {
+      type: String,
+      default: 'pending',
     },
+    team: {
+      type: Schema.Types.ObjectId,
+      ref: 'Team',
+    },
+    assignTo: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     timestamps: true,
@@ -37,4 +46,4 @@ const userSchema = new Schema<ITask, Record<string, never>>(
   }
 );
 
-export const Task = model<ITask, TaskModel>('Task', userSchema);
+export const Task = model<ITask, TaskModel>('Task', taskSchema);
