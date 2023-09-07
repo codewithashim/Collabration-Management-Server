@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Small Informational Website",
+    "price": "$550",
+    "image": [
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg"
+    ],
+    "details": [
+      "Ideal for small businesses seeking an online presence.",
+      "Features a professional website with essential pages (home, about, contact)",
+      "Perfect for showcasing your brand and connecting with potential clients"
+    ],
+    " discount": "10% OFF",
+    "time": "3 Days"
+  },
+  {
+    "name": " Standard Business Website",
+    "price": "$1520",
+    "image": [
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg"
+    ],
+    "details": [
+      "Elevate your online presence with this comprehensive package",
+      "Includes additional pages (services, gallery) and a user-friendly blog",
+      "Boost your visibility with SEO optimization and responsive design"
+    ],
+    "discount": "10% OFF",
+    "time": "7 Days"
+  },
+  {
+    "name": "Professional Business Website",
+    "price": "$2600",
+    "image": [
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg"
+    ],
+    "details": [
+      "Take your business to new heights with our professional package",
+      "Enjoy an e-commerce platform to showcase and sell your products online",
+      "Engage your audience with a content-rich blog and advanced SEO"
+    ],
+    "discount": "10% OFF",
+    "time": "14 Days"
+  },
+  {
+    "name": "Premium Business Solution",
+    "price": "$6200",
+    "image": [
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg",
+      "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/simon-le-marchat-portfolio.jpeg"
+    ],
+    "details": [
+      "Tailored for businesses with unique requirements",
+      "Offers complete customization, intricate design, and complex functionalities",
+      "Experience top-notch performance with ongoing support and maintenance"
+    ],
+    "discount": "10% OFF",
+    "time": "21-30 Days"
+  }
+]
