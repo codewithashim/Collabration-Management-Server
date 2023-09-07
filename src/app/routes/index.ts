@@ -1,6 +1,7 @@
 import express from 'express';
 import { UserRoutes } from '../modules/Users/Users.router';
 import { TaskRoutes } from '../modules/Task/Task.router';
+import { TeamRoutes } from '../modules/Team/Team.router';
 
 const router = express.Router();
 
@@ -12,7 +13,11 @@ const moduleRoutes = [
   {
     path: '/tasks',
     route: TaskRoutes,
-  }
+  },
+  {
+    path: '/teams',
+    route: TeamRoutes,
+  },
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));
