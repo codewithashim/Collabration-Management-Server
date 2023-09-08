@@ -6,22 +6,18 @@ const taskSchema = new Schema<ITask, Record<string, never>>(
   {
     title: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
-      required: true,
     },
     dueDate: {
       type: String,
-      required: true,
     },
     priorityLevel: {
       type: String,
     },
     taskAuthor: {
       type: String,
-      required: true,
     },
     status: {
       type: String,

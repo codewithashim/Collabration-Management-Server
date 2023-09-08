@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Model } from 'mongoose';
+import {  Model } from 'mongoose';
 
 export type ITask = {
   title: string;
@@ -8,7 +8,7 @@ export type ITask = {
   priorityLevel: string;
   assignTo: string[];
   taskAuthor: string;
-  status: string;
+  status?: string;
   team?: string;
 };
 

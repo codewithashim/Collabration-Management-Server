@@ -93,7 +93,7 @@ const inviteUserToTeam = async (
     team.members.push(userId);
     await team.save();
 
-    return team; // Return the updated team
+    return team; 
   } catch (error) {
     throw new ApiError(
       httpStatus.INTERNAL_SERVER_ERROR,

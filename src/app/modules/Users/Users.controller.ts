@@ -1,79 +1,59 @@
-import { Request, RequestHandler, Response } from 'express';
-import catchAsync from '../../../shared/catchAsync';
-import { UserService } from './Users.service';
-import sendResponse from '../../../shared/sendResponse';
-import { IUser } from './Users.interface';
-import httpStatus from 'http-status';
+import { Request, Response } from "express";
+import httpStatus from "http-status";
+import catchAsync from "../../../shared/catchAsync";
+import sendResponse from "../../../shared/sendResponse";
+import { IUser } from "./Users.interface";
+import { UserService } from "./Users.service";
 
-const createUser: RequestHandler = catchAsync(
-  async (req: Request, res: Response) => {
-    const userData = req.body;
-    const result = await UserService.createUser(userData);
-    sendResponse<IUser>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'user created successfully!',
-      data: result,
-    });
-  }
-);
+const getAllUsers = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.getAllUsers();
 
-const getAllUsers: RequestHandler = catchAsync(
-  async (req: Request, res: Response) => {
-    const result = await UserService.getAllUser();
-    sendResponse<IUser[]>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'users fetched successfully!',
-      data: result,
-    });
-  }
-);
+  sendResponse<IUser[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "users fetched successfully!",
+    data: result,
+  });
+});
 
-const getUserById: RequestHandler = catchAsync(
-  async (req: Request, res: Response) => {
-    const id = req.params.id;
-    const result = await UserService.getUserById(id);
-    sendResponse<IUser>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'user fetched successfully!',
-      data: result,
-    });
-  }
-);
+const getUserById = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.getUserById(req.params.id);
 
-const getUserByEmail: RequestHandler = catchAsync(
-  async (req: Request, res: Response) => {
-    const userEmail = req.params.email;
-    const result: IUser | null = await UserService.getUserByEmail(userEmail);
-    sendResponse<IUser>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'user fetched successfully!',
-      data: result,
-    });
-  }
-);
+  sendResponse<IUser>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "user fetched successfully!",
+    data: result,
+  });
+});
 
-const getUserByRole: RequestHandler = catchAsync(
-  async (req: Request, res: Response) => {
-    const userEmail = req.params.email;
-    const result: IUser | null = await UserService.getUserByEmail(userEmail);
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const updatedData = req.body;
+  const result = await UserService.updateUser(id, updatedData);
 
-    sendResponse<IUser>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'user fetched successfully!',
-      data: result,
-    });
-  }
-);
+  sendResponse<IUser>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User updated successfully!",
+    data: result,
+  });
+});
+
+const deleteUser = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await UserService.deleteUser(id);
+  sendResponse<IUser>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "user deleted successfully!",
+    data: result,
+  });
+});
 
 export const UserController = {
-  createUser,
   getAllUsers,
   getUserById,
-  getUserByEmail,
-  getUserByRole,
+  updateUser,
+  deleteUser,
 };
