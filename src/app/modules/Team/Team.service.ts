@@ -18,7 +18,7 @@ const createTeam = async (payload: ITeam): Promise<ITeam> => {
 
 const getAllTeam = async (): Promise<ITeam[]> => {
   try {
-    const Teams = await Team.find();
+    const Teams = await Team.find().populate('members');
     return Teams;
   } catch (error) {
     throw new ApiError(
@@ -30,7 +30,7 @@ const getAllTeam = async (): Promise<ITeam[]> => {
 
 const getTeamById = async (id: string): Promise<ITeam | null> => {
   try {
-    const team = await Team.findById({ _id: id });
+    const team = await Team.findById({ _id: id }).populate('members');
     return team;
   } catch (error) {
     throw new ApiError(
@@ -93,7 +93,7 @@ const inviteUserToTeam = async (
     team.members.push(userId);
     await team.save();
 
-    return team; 
+    return team;
   } catch (error) {
     throw new ApiError(
       httpStatus.INTERNAL_SERVER_ERROR,
