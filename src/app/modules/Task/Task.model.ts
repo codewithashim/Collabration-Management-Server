@@ -13,20 +13,26 @@ const taskSchema = new Schema<ITask, Record<string, never>>(
     dueDate: {
       type: String,
     },
-    priorityLevel: {
-      type: String,
-    },
+    priorityLevel: [
+      {
+        type: String,
+      },
+    ],
     taskAuthor: {
-      type: String,
-    },
-    status: {
-      type: String,
-      default: 'pending',
-    },
-    team: {
       type: Schema.Types.ObjectId,
-      ref: 'Team',
     },
+    status: [
+      {
+        type: String,
+        default: 'pending',
+      },
+    ],
+    team: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Team',
+      },
+    ],
     assignTo: [
       {
         type: Schema.Types.ObjectId,

@@ -6,7 +6,7 @@ import httpStatus from 'http-status';
 const createTask = async (payload: ITask): Promise<ITask> => {
   try {
     const task = new Task(payload);
-    await task.save();
+    (await (await task.save()).populate('team')).populate('assignTo');
     return task;
   } catch (error) {
     throw new ApiError(
@@ -18,7 +18,7 @@ const createTask = async (payload: ITask): Promise<ITask> => {
 
 const getAllTask = async (): Promise<ITask[]> => {
   try {
-    const tasks = await Task.find();
+    const tasks = await Task.find().populate('team').populate('assignTo');
     return tasks;
   } catch (error) {
     throw new ApiError(
@@ -30,7 +30,9 @@ const getAllTask = async (): Promise<ITask[]> => {
 
 const getTaskById = async (id: string): Promise<ITask | null> => {
   try {
-    const task = await Task.findById({ _id: id });
+    const task = await Task.findById({ _id: id })
+      .populate('team')
+      .populate('assignTo');
     return task;
   } catch (error) {
     throw new ApiError(
@@ -42,7 +44,9 @@ const getTaskById = async (id: string): Promise<ITask | null> => {
 
 const getTaskByTeamId = async (id: string): Promise<ITask | null> => {
   try {
-    const getTaskByTeam = await Task.findOne({ team: id });
+    const getTaskByTeam = await Task.findOne({ team: id })
+      .populate('team')
+      .populate('assignTo');
     return getTaskByTeam;
   } catch (error) {
     throw new ApiError(
@@ -63,7 +67,9 @@ const updateTaskById = async (
       {
         new: true,
       }
-    );
+    )
+      .populate('team')
+      .populate('assignTo');
     return result;
   } catch (error) {
     throw new ApiError(
