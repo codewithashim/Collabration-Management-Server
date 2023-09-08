@@ -81,6 +81,12 @@ const inviteUserToTeam = async (
   try {
     const team = await Team.findById(teamId);
 
+    console.log(userId, "userId ++ userId");
+
+    console.log(teamId, "team.members ++ team.members");
+
+    console.log(team, "team ++ team");
+
     if (!team) {
       return null;
     }
@@ -89,7 +95,6 @@ const inviteUserToTeam = async (
       return null;
     }
 
-    // Add the user to the team
     team.members.push(userId);
     await team.save();
 

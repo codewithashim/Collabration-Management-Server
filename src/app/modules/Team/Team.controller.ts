@@ -4,6 +4,7 @@ import { TeamService } from './Team.service';
 import sendResponse from '../../../shared/sendResponse';
 import { ITeam } from './Team.interface';
 import httpStatus from 'http-status';
+import { Team } from './Team.model';
 
 const createTeam: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
@@ -73,24 +74,33 @@ const deleteTeamById: RequestHandler = catchAsync(
 
 const inviteUserToTeam: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
-    const { userId } = req.body;
-    const { teamId } = req.params;
+    const userId = req.body.userId;
+    const teamId = req.params.teamId;
 
-    const updateTeam = await TeamService.inviteUserToTeam(teamId, userId);
+    const team = await Team.findById(teamId);
 
-    if (!updateTeam) {
-      return sendResponse(res, {
-        statusCode: httpStatus.BAD_REQUEST,
-        message: 'User is already a member of the team or team not found',
+    if (!team) {
+      return res.status(404).json({
         success: false,
+        message: 'Team not found',
       });
     }
+
+    if (team.members.includes(userId)) {
+      return res.status(400).json({
+        success: false,
+        message: 'User is already a member of the team',
+      });
+    }
+
+    team.members.push(userId);
+    await team.save();
 
     sendResponse<ITeam>(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: 'Team deleted successfully!',
-      data: updateTeam,
+      data: team,
     });
   }
 );
