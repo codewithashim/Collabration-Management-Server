@@ -17,6 +17,7 @@ const catchAsync_1 = __importDefault(require("../../../shared/catchAsync"));
 const Team_service_1 = require("./Team.service");
 const sendResponse_1 = __importDefault(require("../../../shared/sendResponse"));
 const http_status_1 = __importDefault(require("http-status"));
+const Team_model_1 = require("./Team.model");
 const createTeam = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const TeamData = req.body;
     const result = yield Team_service_1.TeamService.createTeam(TeamData);
@@ -68,21 +69,28 @@ const deleteTeamById = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
     });
 }));
 const inviteUserToTeam = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId } = req.body;
-    const { teamId } = req.params;
-    const updateTeam = yield Team_service_1.TeamService.inviteUserToTeam(teamId, userId);
-    if (!updateTeam) {
-        return (0, sendResponse_1.default)(res, {
-            statusCode: http_status_1.default.BAD_REQUEST,
-            message: 'User is already a member of the team or team not found',
+    const userId = req.body.userId;
+    const teamId = req.params.teamId;
+    const team = yield Team_model_1.Team.findById(teamId);
+    if (!team) {
+        return res.status(404).json({
             success: false,
+            message: 'Team not found',
         });
     }
+    if (team.members.includes(userId)) {
+        return res.status(400).json({
+            success: false,
+            message: 'User is already a member of the team',
+        });
+    }
+    team.members.push(userId);
+    yield team.save();
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
         message: 'Team deleted successfully!',
-        data: updateTeam,
+        data: team,
     });
 }));
 exports.TeamController = {

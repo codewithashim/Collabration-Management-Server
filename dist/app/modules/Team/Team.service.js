@@ -68,13 +68,15 @@ const deleteTeamById = (id) => __awaiter(void 0, void 0, void 0, function* () {
 const inviteUserToTeam = (teamId, userId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const team = yield Team_model_1.Team.findById(teamId);
+        console.log(userId, "userId ++ userId");
+        console.log(teamId, "team.members ++ team.members");
+        console.log(team, "team ++ team");
         if (!team) {
             return null;
         }
         if (team.members.includes(userId)) {
             return null;
         }
-        // Add the user to the team
         team.members.push(userId);
         yield team.save();
         return team;
